@@ -1,7 +1,7 @@
 {
-  "name": "todoist",
+  "name": "the app",
   "version": "1.0.0",
-  "description": "A todo list (Odin Curriculum)",
+  "description": "A description",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/voiceinthedark/odin-todoist.git"
+    "url": ""
   },
-  "keywords": [],
-  "author": "voiceinthedark",
+  "keywords": ["javascript", "vanilla-js"],
+  "author": "voiceinthedark@github.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/voiceinthedark/odin-todoist/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/voiceinthedark/odin-todoist#readme",
+  "homepage": "",
   "devDependencies": {
     "@eslint/js": "^9.31.0",
     "css-loader": "^7.1.2",

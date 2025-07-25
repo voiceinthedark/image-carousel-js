@@ -1,5 +1,5 @@
-# Dynamic dropdown menu with vanilla javascript
+# vanilla javascript project
 
 ## About
 
-A dropdown menu using only vanilla javascript.
+
