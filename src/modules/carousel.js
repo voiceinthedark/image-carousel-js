@@ -4,6 +4,7 @@ class Carousel {
   #parentElement;
   #imageContainer;
   #frameSize;
+  #carouselControl;
   #currentImageIndex;
   #totalImages;
   /**
@@ -11,16 +12,19 @@ class Carousel {
    * @param {HTMLElement} parentElement - the parent element of the carousel
    * @param {HTMLElement} imageContainer - the div container that contains all the images
    * @param {number} frameSize - the size of the frame that will hold the picture shown
+   * @param {HTMLElement} carouselControl 
    * */
-  constructor(parentElement, imageContainer, frameSize) {
+  constructor(parentElement, imageContainer, frameSize, carouselControl) {
     this.#parentElement = parentElement;
     this.#imageContainer = imageContainer;
     this.#frameSize = frameSize;
     this.#currentImageIndex = 0;
     this.#totalImages = this.#imageContainer.children.length;
+    this.#carouselControl = carouselControl;
 
     this.setupListeners();
     this.setupAutoMovement();
+    // this.setupIndicatorDots();
   }
 
   /**
@@ -47,18 +51,37 @@ class Carousel {
    * @method to setup auto movement every 5 seconds on app start
    * */
   setupAutoMovement() {
-    this.#currentImageIndex = 0;
     setInterval(() => {
-      if (this.#currentImageIndex === this.#totalImages) {
-        // console.log('index at the end')
-        this.#currentImageIndex = 0;
-        this.#imageContainer.style.transform = `translateX(-${this.#currentImageIndex * this.#frameSize}px)`;
-      }
-      console.log(this.#currentImageIndex)
       this.moveRight();
-
     }, 5 * 1000);
+  }
 
+  setupIndicatorDots() {
+    console.log('attempting to append controls')
+    console.log(this.#totalImages)
+    for (let i = 0; i < this.#totalImages; i++) {
+      const dot = document.createElement('span');
+      dot.style.width = "10px";
+      dot.style.height = "10px";
+      dot.style.borderRadius = "50%";
+      dot.style.borderStyle = "solid";
+      dot.style.borderWidth = "1px";
+      dot.style.borderColor = "black";
+
+      this.#carouselControl.appendChild(dot);
+      console.log('appending dot')
+    }
+  }
+
+  /**
+   * @method to jump to the picture by index
+   * @param {number} imageIndex 
+   * */
+  jumpToIndex(imageIndex) {
+    if (imageIndex >= 0 && imageIndex < this.#totalImages) {
+      this.#currentImageIndex = imageIndex;
+      this.#imageContainer.style.transform = `translateX(${this.#currentImageIndex * this.#frameSize}px)`;
+    }
   }
 
 
@@ -73,6 +96,9 @@ class Carousel {
       imgItem.alt = 'the image';
       this.#imageContainer?.appendChild(imgItem);
     });
+    this.#totalImages = images.length;
+
+    this.setupIndicatorDots();
   }
 
   /**
@@ -83,19 +109,41 @@ class Carousel {
       this.#currentImageIndex--;
       this.#imageContainer.style.transform = `translateX(-${this.#currentImageIndex * this.#frameSize}px)`;
     }
+    this.activateIndicator(this.#currentImageIndex);
   }
 
   /**
    * @method to move the carousel image to the right
    * */
   moveRight() {
-    const totalImages = this.#imageContainer ? this.#imageContainer.children.length : 0;
-    if (this.#currentImageIndex < totalImages - 1) {
-      this.#currentImageIndex++;
-      this.#imageContainer.style.transform = `translateX(-${(this.#currentImageIndex * this.#frameSize)}px)`;
+    // Use the cached total number of images
+    const totalImages = this.#totalImages;
+
+    // Increment current index
+    this.#currentImageIndex++;
+
+    if (this.#currentImageIndex >= totalImages) {
+      this.#currentImageIndex = 0;
     }
-    if(this.#currentImageIndex === totalImages -1){
-      this.#currentImageIndex = -1;
+
+    this.#imageContainer.style.transform = `translateX(-${(this.#currentImageIndex * this.#frameSize)}px)`;
+
+    this.activateIndicator(this.#currentImageIndex);
+  }
+
+  /**
+   * @method to activate the visual indicator of the image
+   * @param {number} index 
+   * */
+  activateIndicator(index) {
+    console.log(`activating ${index}`);
+    Array.from(this.#carouselControl.children).forEach(child => {
+      child.classList.remove('active-circle');
+    });
+
+    // Then, activate the current indicator
+    if (this.#carouselControl.children[index]) {
+      this.#carouselControl.children[index].classList.add('active-circle');
     }
   }
 }
