@@ -1,38 +1,35 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel JS</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carousel JS</title>
-</head>
-
-<body>
-  <div id="container" class="container">
-    <div class="carousel" id="carousel">
-      <div class="carousel-show" id="carousel-show">
-        <div class="left-arrow" id="left-arrow">
-          <button id="carousel-left"><i class="fa-solid fa-angles-left"></i></button>
-        </div>
-        <div class="image-frame" id="image-frame">
-          <div class="image-container" id="image-container">
-            <!-- images are placed here -->
-
+  <body>
+    <div id="container" class="container">
+      <div class="carousel" id="carousel">
+        <div class="carousel-show" id="carousel-show">
+          <div class="left-arrow" id="left-arrow">
+            <button id="carousel-left">
+              <i class="fa-solid fa-angles-left"></i>
+            </button>
+          </div>
+          <div class="image-frame" id="image-frame">
+            <div class="image-container" id="image-container">
+              <!-- images are placed here -->
+            </div>
+          </div>
+          <div class="right-arrow" id="right-arrow">
+            <button id="carousel-right">
+              <i class="fa-solid fa-angles-right"></i>
+            </button>
           </div>
         </div>
-        <div class="right-arrow" id="right-arrow">
-          <button id="carousel-right"><i class="fa-solid fa-angles-right"></i></button>
+        <div class="carousel-control" id="carousel-control">
+          <div class="indicator-dots" id="indicator-dots"></div>
         </div>
       </div>
-        <div class="carousel-control" id="carousel-control">
-          <div class="indicator-dots" id="indicator-dots">
-
-          </div>
-
-
-        </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
