@@ -5,6 +5,7 @@ class Carousel {
   #imageContainer;
   #frameSize;
   #currentImageIndex;
+  #totalImages;
   /**
    * @constructor
    * @param {HTMLElement} parentElement - the parent element of the carousel
@@ -16,8 +17,10 @@ class Carousel {
     this.#imageContainer = imageContainer;
     this.#frameSize = frameSize;
     this.#currentImageIndex = 0;
+    this.#totalImages = this.#imageContainer.children.length;
 
     this.setupListeners();
+    this.setupAutoMovement();
   }
 
   /**
@@ -38,8 +41,26 @@ class Carousel {
       console.log('click right')
       this.moveRight();
     })
+  }
+
+  /**
+   * @method to setup auto movement every 5 seconds on app start
+   * */
+  setupAutoMovement() {
+    this.#currentImageIndex = 0;
+    setInterval(() => {
+      if (this.#currentImageIndex === this.#totalImages) {
+        // console.log('index at the end')
+        this.#currentImageIndex = 0;
+        this.#imageContainer.style.transform = `translateX(-${this.#currentImageIndex * this.#frameSize}px)`;
+      }
+      console.log(this.#currentImageIndex)
+      this.moveRight();
+
+    }, 5 * 1000);
 
   }
+
 
   /**
    * @method to load images to be displayed into the carousel
@@ -71,7 +92,10 @@ class Carousel {
     const totalImages = this.#imageContainer ? this.#imageContainer.children.length : 0;
     if (this.#currentImageIndex < totalImages - 1) {
       this.#currentImageIndex++;
-      this.#imageContainer.style.transform = `translateX(-${this.#currentImageIndex * this.#frameSize}px)`;
+      this.#imageContainer.style.transform = `translateX(-${(this.#currentImageIndex * this.#frameSize)}px)`;
+    }
+    if(this.#currentImageIndex === totalImages -1){
+      this.#currentImageIndex = -1;
     }
   }
 }
