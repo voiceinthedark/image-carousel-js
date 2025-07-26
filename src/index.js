@@ -13,7 +13,7 @@ import image5 from './assets/images/neom-39n8YVSn0d4-unsplash-scaled.jpg';
 const appContainer = document.getElementById("carousel");
 const imageContainer = document.querySelector("#image-container");
 const carouselControl = document.querySelector(".indicator-dots");
-const carousel = new Carousel(appContainer, imageContainer, 600, carouselControl);
+const carousel = new Carousel(appContainer, imageContainer, 700, carouselControl);
 
 const imageArray = [
   image1,

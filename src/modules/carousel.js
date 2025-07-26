@@ -70,6 +70,11 @@ class Carousel {
 
       this.#carouselControl.appendChild(dot);
       console.log('appending dot')
+
+      dot.addEventListener('click', () => {
+        this.jumpToIndex(i);
+        this.activateIndicator(i);
+      });
     }
   }
 

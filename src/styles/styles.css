@@ -117,9 +117,9 @@ ul {
 
         &>.image-container {
           display: flex;
-          padding-left: 100px;
-          gap: 50px;
-          width: calc(650px * 5);
+          padding-left: 0;
+          gap: 0;
+          width: calc(700px * 5);
           z-index: -10;
           background-color: black;
           height: inherit;
@@ -127,6 +127,9 @@ ul {
 
           &>img {
             display: inline;
+            width: 700px;
+            height: 100%;
+            object-fit: cover;
           }
         }
 
