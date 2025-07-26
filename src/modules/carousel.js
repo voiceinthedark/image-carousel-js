@@ -68,12 +68,16 @@ class Carousel {
       dot.style.borderWidth = "1px";
       dot.style.borderColor = "black";
 
+      dot.dataset.id = ''+i;
+
       this.#carouselControl.appendChild(dot);
       console.log('appending dot')
 
-      dot.addEventListener('click', () => {
-        this.jumpToIndex(i);
-        this.activateIndicator(i);
+      dot.addEventListener('click', (e) => {
+        const clickedIndex = parseInt(e.target?.dataset.id);
+        // console.log(clickedIndex)
+        this.jumpToIndex(clickedIndex);
+        this.activateIndicator(clickedIndex);
       });
     }
   }
@@ -83,10 +87,10 @@ class Carousel {
    * @param {number} imageIndex 
    * */
   jumpToIndex(imageIndex) {
-    if (imageIndex >= 0 && imageIndex < this.#totalImages) {
-      this.#currentImageIndex = imageIndex;
-      this.#imageContainer.style.transform = `translateX(${this.#currentImageIndex * this.#frameSize}px)`;
-    }
+    //if (imageIndex >= 0 && imageIndex < this.#totalImages) {
+      //this.#currentImageIndex = imageIndex;
+      this.#imageContainer.style.transform = `translateX(-${imageIndex * this.#frameSize}px)`;
+    //}
   }
 
 
